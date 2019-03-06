@@ -26,9 +26,12 @@ public class USACO{
     while(file.hasNextLine()){
       String line = file.nextLine();
       if (row < R){
+        //split each line by space and copy into array of Strings
         String[] elev = line.split(" ");
         int col = 0;
+        //loop through the array of elevations
         for(String item : elev){
+          //fill the lake array
           lake[row][col] = Integer.parseInt(item);
           col++;
         }
@@ -46,7 +49,7 @@ public class USACO{
     //calculating aggregated depth
     for (int i = 0; i < lake.length; i++){
       for (int j = 0; j < lake[i].length; j++){
-        //if lower than elevation, then subtract
+        //if lower than elevation, then subtract and add result to depth
         if (lake[i][j] < E){
           depth += (E - lake[i][j]);
         }
@@ -54,7 +57,7 @@ public class USACO{
     }
     return depth * 72 * 72;
   }
-
+  //stomp helper
   public static void stomp(int[][] lake, int r, int c, int d){
     int biggest = 0;
     int r_b = 0;
@@ -82,6 +85,7 @@ public class USACO{
       }
     }
   }
+  //string representation of the lake
   public static String toString(int[][] lake){
     String output = "";
     for(int i = 0; i < lake.length; i++){
