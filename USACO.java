@@ -5,7 +5,7 @@ public class USACO{
   public static int bronze(String filename) throws FileNotFoundException{
     File f = new File(filename);
     Scanner file = new Scanner(f);
-    int R,C,E,N,R_s,C_s,D_s,volume;
+    int R,C,E,N,R_s,C_s,D_s;
     int[][] lake;
     boolean firstLine = true;
     String[] g = new String[4];
@@ -36,27 +36,49 @@ public class USACO{
       }
       if (row > R){
         String[] dir = line.split(" ");
-        R_s = Integer.parseInt(dir[0]);
-        C_s = Integer.parseInt(dir[1]);
+        R_s = Integer.parseInt(dir[0]) - 1;
+        C_s = Integer.parseInt(dir[1]) - 1;
         D_s = Integer.parseInt(dir[2]);
         stomp(lake,R_s,C_s,D_s);
       }
     }
-    //tested the copying the elevation
-    //for (int i = 0; i < lake.length; i++){
-    //  for (int j = 0; j < lake[i].length; j++){
-    //    System.out.println(lake[i][j]);
-    //  }
-    //}
-    return 1;
+    int depth = 0;
+    //calculating aggregated depth
+    for (int i = 0; i < lake.length; i++){
+      for (int j = 0; j < lake[i].length; j++){
+        //if lower than elevation, then subtract
+        if (lake[i][j] < E){
+          depth += (E - lake[i][j]);
+        }
+      }
+    }
+    return depth * 72 * 72;
   }
 
   public static void stomp(int[][] lake, int r, int c, int d){
     int biggest = 0;
+    int r_b = 0;
+    int c_b = 0;
     //finding highest elevation
     for (int row = 0; row < 3; row++){
       for(int col = 0; col < 3; col++){
-        lake[r+row][c+col] = 3;
+        if (lake[r+row][c+col] > biggest){
+          biggest = lake[r+row][c+col];
+          r_b = row+r;
+          c_b = col+c;
+        }
+      }
+    }
+    //stomp out the highest elevation by the amount
+    biggest -= d;
+    lake[r_b][c_b] -= d;
+    //compare the other elevations to the stomped elevation
+    for (int row = 0; row < 3; row++){
+      for(int col = 0; col < 3; col++){
+        //if higher, then stomp to the same elevation
+        if (lake[r+row][c+col] > biggest){
+          lake[r+row][c+col] = biggest;
+        }
       }
     }
   }
