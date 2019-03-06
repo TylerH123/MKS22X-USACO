@@ -34,7 +34,7 @@ public class USACO{
         }
         row++;
       }
-      if (row > R){
+      else {
         String[] dir = line.split(" ");
         R_s = Integer.parseInt(dir[0]) - 1;
         C_s = Integer.parseInt(dir[1]) - 1;
@@ -82,10 +82,19 @@ public class USACO{
       }
     }
   }
-
+  public static String toString(int[][] lake){
+    String output = "";
+    for(int i = 0; i < lake.length; i++){
+      for (int j = 0; j < lake[i].length; j++){
+        output += lake[i][j] + " ";
+      }
+      output += "\n";
+    }
+    return output;
+  }
   public static void main(String[] args){
     try{
-      bronze("makelake.in ");
+      System.out.println(bronze("makelake.in "));
     }
     catch(FileNotFoundException e){
       System.out.println("File not found");
