@@ -94,7 +94,16 @@ public class USACO{
   }
   public static void main(String[] args){
     try{
-      System.out.println(bronze("makelake.in "));
+      //System.out.println(bronze("makelake.1.in"));
+      //System.out.println(bronze("makelake.2.in"));
+      //System.out.println(bronze("makelake.3.in"));
+      //System.out.println(bronze("makelake.4.in"));
+      //System.out.println(bronze("makelake.5.in"));
+      System.out.println(342144 == bronze("makelake.1.in"));
+      System.out.println(102762432 == bronze("makelake.2.in"));
+      System.out.println(1058992704 == bronze("makelake.3.in"));
+      System.out.println(753121152 == bronze("makelake.4.in"));
+      System.out.println(1028282688 == bronze("makelake.5.in"));
     }
     catch(FileNotFoundException e){
       System.out.println("File not found");
