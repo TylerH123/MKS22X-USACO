@@ -22,7 +22,7 @@ public class USACO{
     N = Integer.parseInt(g[3]);
     lake = new int[R][C];
     int row = 0;
-    //copies the the lake elevations into the lake array
+    //copies the lake elevations into the lake array
     while(file.hasNextLine()){
       String line = file.nextLine();
       if (row < R){
@@ -96,21 +96,80 @@ public class USACO{
     }
     return output;
   }
-  public static void main(String[] args){
+
+  public static int silver(String filename) throws FileNotFoundException{
+    File f = new File(filename);
+    Scanner file = new Scanner(f);
+    int N,M,T;
+    char[][] land;
+    boolean firstLine = true;
+    String[] g = new String[3];
+    if (file.hasNextLine()){
+      //split the first line by space then copy which get copied into an array of String
+      if (firstLine){
+        g = file.nextLine().split(" ");
+        firstLine = false;
+      }
+    }
+    N = Integer.parseInt(g[0]);
+    M = Integer.parseInt(g[1]);
+    T = Integer.parseInt(g[2]);
+    land = new char[N][M];
+    int row = 0;
+    //initializing r1,r2,c1,c2
+    int R1 = 0;
+    int C1 = 0;
+    int R2 = 0;
+    int C2 = 0;
+    //copies the grass and trees into the land array
+    while(file.hasNextLine()){
+      String line = file.nextLine();
+      if (row < N){
+        //split each line by space and copy into array of Strings
+        String[] grass = line.split(" ");
+        int col = 0;
+        //loop through the array of grass and trees
+        for(int i = 0; i < grass.length; i++){
+          //fill the land array
+          land[row][col] = grass[i].charAt(i);
+          col++;
+        }
+        row++;
+      }
+      else {
+        //get r1,r2,c1,c2
+        String[] loc = line.split(" ");
+        R1 = Integer.parseInt(loc[0]) - 1;
+        C2 = Integer.parseInt(loc[1]) - 1;
+        R2 = Integer.parseInt(loc[2]) - 1;
+        C2 = Integer.parseInt(loc[3]) - 1;
+      }
+    }
+    return moveTo(R1,C1,T,R2,C2);
+  }
+  //recursive helper method to find how to get to r2,c2 from r1,c1
+  public static int moveTo(int r, int c, int t, int r2, int c2){
+
+
+    return 1;
+  }
+  public static void testBronze(){
     try{
-      //System.out.println(bronze("makelake.1.in"));
-      //System.out.println(bronze("makelake.2.in"));
-      //System.out.println(bronze("makelake.3.in"));
-      //System.out.println(bronze("makelake.4.in"));
-      //System.out.println(bronze("makelake.5.in"));
+      System.out.println(bronze("makelake.1.in"));
+      System.out.println(bronze("makelake.2.in"));
+      System.out.println(bronze("makelake.3.in"));
+      System.out.println(bronze("makelake.4.in"));
+      System.out.println(bronze("makelake.5.in"));
       System.out.println(342144 == bronze("makelake.1.in"));
       System.out.println(102762432 == bronze("makelake.2.in"));
       System.out.println(1058992704 == bronze("makelake.3.in"));
       System.out.println(753121152 == bronze("makelake.4.in"));
       System.out.println(1028282688 == bronze("makelake.5.in"));
     }
-    catch(FileNotFoundException e){
+    catch (FileNotFoundException e){
       System.out.println("File not found");
     }
+  }
+  public static void main(String[] args){
   }
 }
