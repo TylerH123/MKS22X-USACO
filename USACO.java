@@ -85,7 +85,7 @@ public class USACO{
       }
     }
   }
-  //string representation of the lake
+  //string representation of lake
   public static String toString(int[][] lake){
     String output = "";
     for(int i = 0; i < lake.length; i++){
@@ -96,7 +96,18 @@ public class USACO{
     }
     return output;
   }
-
+  //string representation of land
+  public static String toString(char[][] land){
+    String output = "";
+    for(int i = 0; i < land.length; i++){
+      for (int j = 0; j < land[i].length; j++){
+        output += land[i][j] + " ";
+      }
+      output += "\n";
+    }
+    return output;
+  }
+  //string representation of land
   public static int silver(String filename) throws FileNotFoundException{
     File f = new File(filename);
     Scanner file = new Scanner(f);
@@ -126,12 +137,11 @@ public class USACO{
       String line = file.nextLine();
       if (row < N){
         //split each line by space and copy into array of Strings
-        String[] grass = line.split(" ");
         int col = 0;
         //loop through the array of grass and trees
-        for(int i = 0; i < grass.length; i++){
+        for(int i = 0; i < line.length(); i++){
           //fill the land array
-          land[row][col] = grass[i].charAt(i);
+          land[row][col] = line.charAt(i);
           col++;
         }
         row++;
@@ -145,13 +155,21 @@ public class USACO{
         C2 = Integer.parseInt(loc[3]) - 1;
       }
     }
+    //System.out.println(toString(land));
     return moveTo(R1,C1,T,R2,C2);
   }
   //recursive helper method to find how to get to r2,c2 from r1,c1
+  //pretty similar to maze problem
   public static int moveTo(int r, int c, int t, int r2, int c2){
+    int[] moves = new int[]{1,0,-1,0,0,1,0,-1};
+    int count = 0;
+    if (t == 0){
+      if (r == r2 && c == c2) return 1;
+    }
+    else{
 
-
-    return 1;
+    }
+    return count;
   }
   public static void testBronze(){
     try{
@@ -170,6 +188,15 @@ public class USACO{
       System.out.println("File not found");
     }
   }
+  public static void testSilver(){
+    try{
+      System.out.println(silver("ctravel.1.in"));
+    }
+    catch(FileNotFoundException e){
+      System.out.println("File not found");
+    }
+  }
   public static void main(String[] args){
+    testSilver();
   }
 }
