@@ -133,7 +133,21 @@ public class USACO{
     //System.out.println(toString(land));
     moves[R1][C1] = 1;
     int g = (R1+C1)%2;
-
+    for (int t = 0; t < T; t++) {
+			for (int r = 0; r < N; r++) {
+				for (int c = (r+g)%2; c < M; c += 2) {
+					if (land[r][c]) {
+						if (r > 0) moves[r-1][c] += moves[r][c];
+						if (c > 0) moves[r][c-1] += moves[r][c];
+						if (r < N-1) moves[r+1][c] += moves[r][c];
+						if (c < M-1) moves[r][c+1] += moves[r][c];
+					}
+					moves[r][c] = 0;
+				}
+			}
+			g = (g+1)%2;
+		}
+		return moves[R2][C2];
   }
   //recursive helper method to find how to get to r2,c2 from r1,c1
   //pretty similar to maze problem
