@@ -111,66 +111,32 @@ public class USACO{
   public static int silver(String filename) throws FileNotFoundException{
     File f = new File(filename);
     Scanner file = new Scanner(f);
-    int N,M,T;
-    char[][] land;
-    boolean firstLine = true;
-    String[] g = new String[3];
-    if (file.hasNextLine()){
-      //split the first line by space then copy which get copied into an array of String
-      if (firstLine){
-        g = file.nextLine().split(" ");
-        firstLine = false;
-      }
-    }
-    N = Integer.parseInt(g[0]);
-    M = Integer.parseInt(g[1]);
-    T = Integer.parseInt(g[2]);
-    land = new char[N][M];
-    int row = 0;
-    //initializing r1,r2,c1,c2
-    int R1 = 0;
-    int C1 = 0;
-    int R2 = 0;
-    int C2 = 0;
+    int N,M,T,R1,C1,R2,C2;
+    boolean[][] land;
+    N = Integer.parseInt(file.next());
+    M = Integer.parseInt(file.next());
+    T = Integer.parseInt(file.next());
+    land = new boolean[N][M];
+    int[][] moves = new int[N][M];
     //copies the grass and trees into the land array
-    while(file.hasNextLine()){
-      String line = file.nextLine();
-      if (row < N){
-        //split each line by space and copy into array of Strings
-        int col = 0;
-        //loop through the array of grass and trees
-        for(int i = 0; i < line.length(); i++){
-          //fill the land array
-          land[row][col] = line.charAt(i);
-          col++;
-        }
-        row++;
-      }
-      else {
-        //get r1,r2,c1,c2
-        String[] loc = line.split(" ");
-        R1 = Integer.parseInt(loc[0]) - 1;
-        C2 = Integer.parseInt(loc[1]) - 1;
-        R2 = Integer.parseInt(loc[2]) - 1;
-        C2 = Integer.parseInt(loc[3]) - 1;
+    for(int r = 0; r < N; r++){
+      for(int c = 0; c < M; c++){
+        String word = file.next();
+        //fill the land array
+        land[r][c] = (word.charAt(c) != '*');
       }
     }
+    R1 = Integer.parseInt(file.next()) - 1;
+    C1 = Integer.parseInt(file.next()) - 1;
+    R2 = Integer.parseInt(file.next()) - 1;
+    C2 = Integer.parseInt(file.next()) - 1;
     //System.out.println(toString(land));
-    return moveTo(R1,C1,T,R2,C2);
+    moves[R1][C1] = 1;
+    int g = (R1+C1)%2;
+
   }
   //recursive helper method to find how to get to r2,c2 from r1,c1
   //pretty similar to maze problem
-  public static int moveTo(int r, int c, int t, int r2, int c2){
-    int[] moves = new int[]{1,0,-1,0,0,1,0,-1};
-    int count = 0;
-    if (t == 0){
-      if (r == r2 && c == c2) return 1;
-    }
-    else{
-
-    }
-    return count;
-  }
   public static void testBronze(){
     try{
       System.out.println(bronze("makelake.1.in"));
