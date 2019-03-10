@@ -120,8 +120,8 @@ public class USACO{
     int[][] moves = new int[N][M];
     //copies the grass and trees into the land array
     for(int r = 0; r < N; r++){
+      String word = file.next();
       for(int c = 0; c < M; c++){
-        String word = file.next();
         //fill the land array
         land[r][c] = (word.charAt(c) != '*');
       }
@@ -170,7 +170,11 @@ public class USACO{
   }
   public static void testSilver(){
     try{
-      System.out.println(silver("ctravel.1.in"));
+      System.out.println(1 == silver("ctravel.1.in"));
+      System.out.println(74 == silver("ctravel.2.in"));
+      System.out.println(6435 == silver("ctravel.3.in"));
+      System.out.println(339246 == silver("ctravel.4.in"));
+      System.out.println(0 == silver("ctravel.5.in"));
     }
     catch(FileNotFoundException e){
       System.out.println("File not found");
